@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Sentimen Film</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('static/img/flight.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.4;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            resize: none;
+            font-family: inherit;
+            color: #333;
+        }
+
+        textarea::placeholder {
+            color: #aaa;
+        }
+
+        .btn-detect {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #d60000;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-detect:hover {
+            background-color: #9a0000;
+        }
+
+        h3 {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Analisis Sentimen Ulasan Film Menggunakan BERT</h2>
+
+        <form method="POST">
+            <textarea name="text" placeholder="Masukkan teks ulasan film di sini...">{{ text }}</textarea>
+            <button type="submit" class="btn-detect">Deteksi Sentimen</button>
+        </form>
+
+        {% if prediction %}
+            <h3>Hasil Prediksi: <strong>{{ prediction }}</strong></h3>
+            <ul>
+                {% for label, prob in probabilities.items() %}
+                    <li><strong>{{ label }}</strong>: {{ prob }}%</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
