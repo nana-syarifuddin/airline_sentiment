@@ -1,4 +1,9 @@
-Flask
-gunicorn
+pandas
+numpy
+scikit-learn
+nltk
+regex
 transformers
 torch
+flask
+gunicorn
