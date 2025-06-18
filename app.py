@@ -1,6 +1,6 @@
 import streamlit as st
 import torch
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import AutoTokenizer, BertForSequenceClassification
 import numpy as np
 
 # Set page config
